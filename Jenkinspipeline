@@ -28,7 +28,7 @@ sh "${mavenHome}/bin/mvn clean sonar:sonar"
 }
 
 stage('UploadArtifcatsIntoArtifactoryRepo'){
-sh "${mavenHome}/bin/mvn clean deploy"
+sh "${mavenHome}/bin/mvn clean deploy2"
 }
 
 stage('DeployAppIntoTomcatServer'){
@@ -38,7 +38,7 @@ sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war  ec2-user@1
 }
 }//try block closing
 catch (e){
-slacknotifications(currentBuild.result)
+slacknotifications('FAILED')
 throw e 
 }
 finally{
